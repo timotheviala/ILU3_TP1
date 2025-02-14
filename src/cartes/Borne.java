@@ -1,9 +1,10 @@
 package cartes;
 
-public class Borne {
+public class Borne extends Carte{
 	private int km;
 	
-	public Borne(int km) {
+	public Borne(int km,String nom) {
+		super(nom);
 		this.km=km;
 	}
 

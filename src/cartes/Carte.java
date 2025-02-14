@@ -6,4 +6,10 @@ public abstract class Carte {
 	public Carte(String nom) {
 		this.nom=nom;
 	}
+
+	public String getNom() {
+		return nom;
+	}
+	
+	
 }
