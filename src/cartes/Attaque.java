@@ -6,10 +6,5 @@ public class Attaque extends Bataille{
 		super(type,nom);
 		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public String toString() {
-		return "Un adversaire a déposé une attaque de type "+super.getType().getAttaque();
-	}	
 	
 }

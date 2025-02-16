@@ -142,7 +142,7 @@ public class JeuDeCartes {
 	public Carte[] donnerCartes() {
 		int nbToTalCartes=0;
 		
-		for(int i=0;i<19;i++) {
+		for(int i=0;i<typesDeCartes.length;i++) {
 			nbToTalCartes+=typesDeCartes[i].getNbExemplaires();
 		}
 		
@@ -150,7 +150,7 @@ public class JeuDeCartes {
 		
 		int indiceCartes=0;
 		
-		for(int i=0;i<19;i++) {
+		for(int i=0;i<typesDeCartes.length;i++) {
 			for(int j=0;j<typesDeCartes[i].getNbExemplaires();j++) {
 				cartes[indiceCartes]=typesDeCartes[i].getCarte();
 				indiceCartes++;

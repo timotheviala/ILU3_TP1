@@ -6,12 +6,6 @@ public class Parade extends Bataille{
 		super(type,nom);
 		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public String toString() {
-		return "Vous avez d�pos� une parade de type "+super.getType().getParade();
-	}
-	
 	
 
 }

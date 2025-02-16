@@ -10,6 +10,6 @@ public class Borne extends Carte{
 
 	@Override
 	public String toString() {
-		return "Le joueur place une borne de "+km+"kms!";
+		return super.getNom();
 	}
 }
