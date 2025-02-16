@@ -14,7 +14,7 @@ public class TestSabot {
 	
 	public TestSabot(){
 		jeu.initialiserJeu();
-		sabot = new Sabot(jeu.donnerCartes());
+		sabot = new Sabot<Carte>(jeu.donnerCartes());
 	}
 	
 
@@ -60,9 +60,9 @@ public class TestSabot {
 
 	public static void main(String[] args) {
 		TestSabot testPioche = new TestSabot();
-		//testPioche.questionA();
+		testPioche.questionA();
 		//testPioche.questionB();
-		testPioche.questionC();
+		//testPioche.questionC();
 	}
 
 }

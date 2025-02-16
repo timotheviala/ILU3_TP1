@@ -65,11 +65,12 @@ public class Sabot <T extends Carte> implements Iterable<T>{
 	}
 	
 	public void ajouterCarte(T carte) throws ArrayIndexOutOfBoundsException{
-		if(nbCartes==sabot.length-1) {
+		if(nbCartes>=sabot.length-1) {
 			throw new ArrayIndexOutOfBoundsException();
 		}
 		sabot[nbCartes]=carte;
 		nbCartes++;
+		nbOperations++;
 	}
 	
 	public T piocher() {
