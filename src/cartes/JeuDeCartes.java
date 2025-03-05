@@ -78,6 +78,7 @@ public class JeuDeCartes {
 		int nbExemplaires;
 		String nom;
 		
+		//initialisation de l'ensemble des cartes 
 		for(int i=0;i<nbCartes;i++) {
 			System.out.println("Veuillez choisir votre type de carte � ajouter:\n"
 					+ " 1 - Probleme\n 2 - Limite\n 3 - Borne\n");
@@ -101,7 +102,7 @@ public class JeuDeCartes {
 					typesDeCartes[i]=ajouterConfigProbleme(typeProbleme,pbSouhaite);
 					break;
 				case 2:
-					System.out.println("Veuillez saisir le type de limit:\n"
+					System.out.println("Veuillez saisir le type de limite:\n"
 							+ " 1 - Debut limite\n 2 - Fin Limite");
 					int choixLim=scanner.nextInt();
 					System.out.println("Veuillez saisir le nom:\n");
@@ -142,14 +143,17 @@ public class JeuDeCartes {
 	public Carte[] donnerCartes() {
 		int nbToTalCartes=0;
 		
+		//Comptage de la totalité des cartes en parcourant les configurations
 		for(int i=0;i<typesDeCartes.length;i++) {
 			nbToTalCartes+=typesDeCartes[i].getNbExemplaires();
 		}
 		
+		//Initialisation d'un tableau pouvant stocker l'ensemble des cartes
 		Carte[] cartes=new Carte[nbToTalCartes];
 		
 		int indiceCartes=0;
 		
+		//Parcours de deux boucles imbriquées pour compléter le tableau
 		for(int i=0;i<typesDeCartes.length;i++) {
 			for(int j=0;j<typesDeCartes[i].getNbExemplaires();j++) {
 				cartes[indiceCartes]=typesDeCartes[i].getCarte();

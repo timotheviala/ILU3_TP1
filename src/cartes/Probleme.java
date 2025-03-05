@@ -17,6 +17,13 @@ public abstract class Probleme extends Carte {
 		return super.getNom();
 	}
 	
+	public boolean equals(Object obj) {
+		if(obj instanceof Probleme) {
+			Probleme carteAComparer=(Probleme) obj;
+			return type.equals(carteAComparer.getType()) && carteAComparer.getNom().equals(nom);
+		}
+		return false;
+	}
 	
 	
 }

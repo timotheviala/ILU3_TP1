@@ -10,6 +10,14 @@ public abstract class Limite extends Carte{
 		return super.getNom();
 	}
 	
+	public boolean equals(Object obj) {
+		if(obj instanceof Limite) {
+			Limite carteAComparer=(Limite) obj;
+			return carteAComparer.getNom().equals(nom);
+		}
+		return false;
+	}
+	
 	
 }
 

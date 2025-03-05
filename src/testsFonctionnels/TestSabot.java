@@ -39,20 +39,22 @@ public class TestSabot {
 	public void questionB() {
 		for (Iterator<Carte> iterator = sabot.iterator(); iterator.hasNext();) {
 			System.out.println("Je pioche " + iterator.next());
-			iterator.remove();
 		}
 	}
 
 	// 4.2.c
 	public void questionC() {
+		//2 lignes à ajouter pour exception
 		Carte cartePiochee = sabot.piocher();
 		System.out.println("Je pioche " + cartePiochee);
+		
 		for (Iterator<Carte> iterator = sabot.iterator(); iterator.hasNext();) {
 			Carte carte = iterator.next();
 			System.out.println("Je pioche " + carte);
-			iterator.remove();
 			//cartePiochee = sabot.piocher();
+			//ligne pour exception
 			sabot.ajouterCarte(new Botte(cartes.Type.ACCIDENT,"AsDuVolant"));
+			
 		}
 		Iterator<Carte> iterator = sabot.iterator();
 		System.out.println("\nLa pioche contient encore des cartes ? " + iterator.hasNext());
@@ -60,8 +62,8 @@ public class TestSabot {
 
 	public static void main(String[] args) {
 		TestSabot testPioche = new TestSabot();
-		testPioche.questionA();
-		//testPioche.questionB();
+		//testPioche.questionA();
+		testPioche.questionB();
 		//testPioche.questionC();
 	}
 

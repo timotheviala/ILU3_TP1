@@ -20,6 +20,7 @@ public class Sabot <T extends Carte> implements Iterable<T>{
 		return new Iterateur();
 	}
 	
+	//classe interne iterateur
 	private class Iterateur implements Iterator<T>{
 		private int indiceIterateur=0;
 		private boolean nextEffectue=false;
