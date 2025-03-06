@@ -37,5 +37,6 @@ public class TestJeuDeCartes {
         System.out.println(listeCartes);
         System.out.println("liste rassemblée sans erreur ? "
         + GestionCartes.verifierRassemblement(listeCartes));
+        System.out.println(GestionCartes.extraire(listeCartes).toString());
 	}
 }
