@@ -1,6 +1,5 @@
 package testsFonctionnels;
 
-import cartes.JeuDeCartes;
 import utils.GestionCartes;
 
 import java.util.*;
@@ -21,6 +20,7 @@ public class TestJeuDeCartes {
 //            System.out.println("erreur de nombre");
 //        }
         
+		System.out.println("TEST DONNE\n");
         JeuDeCartes jeu = new JeuDeCartes();
         jeu.initialiserJeu();
         List<Carte> listeCarteNonMelangee = new LinkedList<>();
@@ -38,5 +38,19 @@ public class TestJeuDeCartes {
         System.out.println("liste rassembl�e sans erreur ? "
         + GestionCartes.verifierRassemblement(listeCartes));
         System.out.println(GestionCartes.extraire(listeCartes).toString());
-	}
+        
+        System.out.println("\nTEST AVEC UNE LISTE DANS LE DESORDRE\n");
+        List<Carte> test=new ArrayList<Carte>();
+        test.add(new Borne(30, "b30"));
+        test.add(new DebutLimite("dl"));
+        test.add(new Borne(30, "b30"));
+        test.add(new DebutLimite("dl"));
+        test.add(new DebutLimite("dl"));
+    	System.out.println("Liste init : "+test);
+    	test=GestionCartes.rassembler(test);
+    	System.out.println("Liste rassembler : "+test);
+    	System.out.println("Rassemblee sans erreur : "+GestionCartes.verifierRassemblement(test));
+    	System.out.println("Trois cartes randoms : "+GestionCartes.extraire(test)+ " "+
+    	GestionCartes.extraire(test)+" "+GestionCartes.extraire(test));
+        }
 }

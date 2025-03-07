@@ -83,23 +83,18 @@ public class GestionCartes {
 		//on récupère le premier élément pour intiialiser precedent
 		ListIterator<Carte> iter=listeAVerifier.listIterator();
 		Carte prec=iter.next();
-		int ind1=0,ind2=0;
 		//on initialise un itérateur pour parcourir la liste
 		ListIterator<Carte> iter1=listeAVerifier.listIterator();
 		//on se positionne au deuxieme element pour commencer
 		for(iter1.next();iter1.hasNext();) {
 			Carte current=iter1.next();
-			ind1++;
 			
 			//si jamais le precedent est différent du courant on vérifie que le précédent n'est plus dans la liste
 			if(!(prec.equals(current))) {	
 				//on initialise un deuxième itérateur pour parcourir le reste de la liste
-				ind2=0;
 				for(ListIterator<Carte> iter2=iter1;iter2.hasNext();) {
-					ind2++;
 					Carte currentSecond=iter2.next();	
 					if(prec.equals(currentSecond)) {
-						System.out.println("init ="+ind1+" et deuxieme="+ind2);
 						return false;
 					}
 				}
