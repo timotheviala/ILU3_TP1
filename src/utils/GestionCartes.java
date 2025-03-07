@@ -26,6 +26,7 @@ public class GestionCartes {
 		Carte carteChoisie=cartes.get(indiceAleatoire);
 		//on supprime cette carte
 		ListIterator<Carte> iter=cartes.listIterator(indiceAleatoire);
+		iter.next();
 		iter.remove();
 		return carteChoisie;
 	}
@@ -51,25 +52,31 @@ public class GestionCartes {
 	}
 	
 	public static List<Carte> rassembler(List<Carte> listeATrier) {
-		//nouvelle liste triee
-		List<Carte> listeTriee=new ArrayList<>();
-		
-		//parcours de la liste non triee
-		for(ListIterator<Carte> iter=listeATrier.listIterator();iter.hasNext();) {
-			Carte carte=iter.next();
-			
-			//deuxieme iterateur pour coller les éléments identiques
-			for(ListIterator<Carte> iter2=iter;iter2.hasNext();) {
-				Carte current=iter2.next();
-				
-				if(carte.equals(current)) {
-					listeTriee.add(current);
-					iter2.remove();
-				}
-			}
-			iter.remove();
-		}
-		return listeTriee;
+	    List<Carte> listeTriee = new ArrayList<>();
+	    
+	    // Copie pour éviter les erreurs
+	    List<Carte> listeATrier2 = new ArrayList<>(listeATrier); 
+	    
+	    //tant qu'elle n'est pas vide on traite
+	    while (!listeATrier2.isEmpty()) {
+	    	
+	    	//récupération de la premiere carte et ajout à la liste triee
+	        Carte carte = listeATrier2.get(0);
+	        listeTriee.add(carte);
+	        //supprime la carte qu'on traitait
+	        listeATrier2.remove(0); 
+	        
+	        //parcours à partir de l'élément suivant
+	        ListIterator<Carte> iter = listeATrier2.listIterator(0);
+	        while (iter.hasNext()) {
+	            Carte current = iter.next();
+	            if (current.equals(carte)) {
+	                listeTriee.add(current);
+	                iter.remove();
+	            }
+	        }
+	    }
+	    return listeTriee;
 	}
 	
 	public static boolean verifierRassemblement(List<Carte> listeAVerifier) {
