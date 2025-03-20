@@ -6,10 +6,6 @@ import java.util.regex.Matcher;
 public class JeuDeCartes {
 	private Configuration[] typesDeCartes;
 	
-	public JeuDeCartes() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	private static class Configuration{
 		private int nbExemplaires;
 		private Carte carte;
@@ -162,6 +158,20 @@ public class JeuDeCartes {
 		}
 		
 		return cartes;
+	}
+	
+	public boolean checkCount() {
+		Carte[] cartes=donnerCartes();
+		int indiceCartes=0;
+		for(int i=0;i<typesDeCartes.length;i++) {
+			for(int j=indiceCartes;j<typesDeCartes[i].getNbExemplaires();j++) {
+				if(!(cartes[j].equals(typesDeCartes[i].getCarte()))) {
+					return false;
+				}
+				indiceCartes++;
+			}
+		}
+		return true;
 	}
 
 }
