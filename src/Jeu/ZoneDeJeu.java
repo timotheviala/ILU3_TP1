@@ -46,4 +46,14 @@ public class ZoneDeJeu {
 			attaquesParades.add(bataille);
 		}
 	}
+	
+	public boolean peutAvancer() {
+		return !attaquesParades.isEmpty() && attaquesParades.getFirst().getNom().equals("FeuVert");
+	}
+	
+	public boolean estDepotFeuVertAutorise() {
+		return attaquesParades.isEmpty() || 
+				attaquesParades.getFirst().getNom().equals("FeuRouge") ||
+				!(attaquesParades.getFirst().getNom().equals("FeuVert"));
+	}
 }
