@@ -17,4 +17,8 @@ public class Jeu {
 		sabot=new Sabot((Carte[]) listeCartes.toArray());
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 42cd2838128b6e659b35aafa41228470050ae0e8
