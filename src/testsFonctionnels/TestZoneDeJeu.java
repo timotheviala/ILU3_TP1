@@ -101,7 +101,6 @@ public class TestZoneDeJeu {
 			zoneDeJeu.deposer(new DebutLimite("Debut limite"));
 		}
 		System.out.println("peut avancer ? " + zoneDeJeu.peutAvancer());
-		System.out.println(zoneDeJeu.estDepotLimiteAutorise(new FinLimite("fl"))+"whatt");
 		// D�pot 100 bornes
 		System.out.println("Deposer carte borne - 100");
 		depotOK = zoneDeJeu.estDepotAutorise(new Borne(100,"Borne 100"));
@@ -110,6 +109,8 @@ public class TestZoneDeJeu {
 			zoneDeJeu.deposer(new Borne(100,"Borne 100"));
 		}
 		System.out.println("peut avancer ? " + zoneDeJeu.peutAvancer());
+		System.out.println(zoneDeJeu.estDepotLimiteAutorise(new FinLimite("fl"))+"whatt");
+
 		// Depot 25 bornes
 		System.out.println("Deposer carte borne - 25");
 		depotOK = zoneDeJeu.estDepotAutorise(new Borne(25,"Borne 25"));

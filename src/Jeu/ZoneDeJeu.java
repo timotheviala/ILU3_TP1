@@ -39,10 +39,20 @@ public class ZoneDeJeu {
 			Borne borne=(Borne) c;
 			bornes.add(borne);
 		} else if(c instanceof Limite) {
-			Limite limite=(Limite) c;
+			Limite limite;
+			if(c instanceof DebutLimite) {
+				limite=(DebutLimite) c;
+			}else {
+				limite=(FinLimite) c;
+			}
 			limitesVitesse.add(limite);
 		}else {
-			Bataille bataille=(Bataille) c;
+			Bataille bataille;
+			if(c instanceof Attaque) {
+				bataille=(Attaque) c;
+			}else {
+				bataille=(Parade) c;
+			}
 			attaquesParades.add(bataille);
 		}
 	}
