@@ -18,7 +18,7 @@ public class ZoneDeJeu {
 		if(limitesVitesse.isEmpty()) {
 			return 200;
 		}
-		Limite limite=limitesVitesse.remove();
+		Limite limite=limitesVitesse.getLast();
 		if(limite instanceof FinLimite) {
 			return 200;
 		}
@@ -58,11 +58,6 @@ public class ZoneDeJeu {
 	}
 	
 	public boolean peutAvancer() {
-		//rajouer
-		if(!attaquesParades.isEmpty()) {
-			System.out.println(attaquesParades.getFirst().getNom());
-		}
-		//end
 	    return !attaquesParades.isEmpty() && !(attaquesParades.getLast() instanceof Attaque) && attaquesParades.getLast().getType() == Type.FEU && "FeuVert".equals(attaquesParades.getLast().getType().getParade());
 	}
 
@@ -79,20 +74,8 @@ public class ZoneDeJeu {
 
 	public boolean estDepotLimiteAutorise(Limite limite) {
 	    if (limite instanceof DebutLimite) {
-	    	//rajouter
-	    	if(limitesVitesse.isEmpty()) {
-	    		System.out.println("ok pr debut limte");
-	    	}
-	    	//end
 	        return limitesVitesse.isEmpty() || (limitesVitesse.getLast() instanceof FinLimite);
 	    }
-	    //rajouter
-	    if(!limitesVitesse.isEmpty()) {
-    		System.out.println(limitesVitesse.getLast().getNom());
-    	}else {
-    		System.out.println("vide");
-    	}
-	    //end
 	    return !limitesVitesse.isEmpty() && limitesVitesse.getLast() instanceof DebutLimite;
 	}
 
