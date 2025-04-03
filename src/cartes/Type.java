@@ -11,7 +11,7 @@ public enum Type {
 		this.parade=parade;
 		this.attaque=attaque;
 		this.botte=botte;
-	}
+	} 
 
 	public String getParade() {
 		return parade;
@@ -24,7 +24,6 @@ public enum Type {
 	public String getBotte() {
 		return botte;
 	}
-	
 	
 	
 }

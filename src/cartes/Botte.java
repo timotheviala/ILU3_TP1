@@ -7,4 +7,12 @@ public class Botte extends Probleme {
 		// TODO Auto-generated constructor stub
 	}	
 	
+	public boolean equals(Object obj) {
+		if(obj instanceof Botte) {
+			Botte botte=(Botte) obj;
+			return getType().equals(botte.getType()) && getNom().equals(botte.getNom()) ;
+		}
+		return false;
+	}
+	
 }

@@ -7,4 +7,12 @@ public class Attaque extends Bataille{
 		// TODO Auto-generated constructor stub
 	}
 	
+	public boolean equals(Object obj) {
+		if(obj instanceof Attaque) {
+			Attaque attaque=(Attaque) obj;
+			return getType().equals(attaque.getType()) && getNom().equals(attaque.getNom());
+		}
+		return false;
+	}
+	
 }

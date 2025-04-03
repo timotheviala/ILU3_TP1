@@ -1,4 +1,5 @@
 package Jeu;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -13,9 +14,10 @@ public class ZoneDeJeu {
 	private LinkedList<Limite> limitesVitesse=new LinkedList<>();
 	private LinkedList<Bataille> attaquesParades=new LinkedList<>();
 	private Set<Borne> bornes=new HashSet<>();
+	private Set<Botte> bottes=new HashSet<>();
 	
 	public int donnerLimitationVitesse() {
-		if(limitesVitesse.isEmpty()) {
+		if(limitesVitesse.isEmpty() || estPrioritaire()) {
 			return 200;
 		}
 		Limite limite=limitesVitesse.getLast();
@@ -46,7 +48,7 @@ public class ZoneDeJeu {
 				limite=(FinLimite) c;
 			}
 			limitesVitesse.add(limite);
-		}else {
+		}else if(c instanceof Bataille) {
 			Bataille bataille;
 			if(c instanceof Attaque) {
 				bataille=(Attaque) c;
@@ -54,17 +56,30 @@ public class ZoneDeJeu {
 				bataille=(Parade) c;
 			}
 			attaquesParades.add(bataille);
+		}else {
+			Botte botte=(Botte) c;
+			System.out.println(botte.getNom());
+			bottes.add(botte);
 		}
 	}
 	
 	public boolean peutAvancer() {
-	    return !attaquesParades.isEmpty() && !(attaquesParades.getLast() instanceof Attaque) && attaquesParades.getLast().getType() == Type.FEU && "FeuVert".equals(attaquesParades.getLast().getType().getParade());
+		System.out.println("Cond 1 "+estPrioritaire());
+	    return (attaquesParades.isEmpty() && estPrioritaire())
+	    		|| (!attaquesParades.isEmpty() && attaquesParades.getLast() instanceof Parade && estPrioritaire() ) 
+	    		 || (!attaquesParades.isEmpty() && attaquesParades.getLast().getType() == Type.FEU && "FeuVert".equals(attaquesParades.getLast().getType().getParade()))
+	    		 || (!attaquesParades.isEmpty() && attaquesParades.getLast() instanceof Attaque && attaquesParades.getLast().getType() == Type.FEU && estPrioritaire())
+	    		 || (!attaquesParades.isEmpty() && attaquesParades.getLast() instanceof Attaque && !(bottes.isEmpty()) && estPrioritaire());
 	}
 
 	public boolean estDepotFeuVertAutorise() {
+		if(estPrioritaire()){
+			return false;
+		}
 	    return attaquesParades.isEmpty() || 
 	           attaquesParades.getLast().getType().getAttaque().equals("FeuRouge") ||
-	           !attaquesParades.getLast().getType().getParade().equals("FeuVert");
+	           !attaquesParades.getLast().getType().getParade().equals("FeuVert")
+	           || bottes.contains(new Botte(attaquesParades.getLast().getType(),attaquesParades.getLast().getType().getParade()));
 	}
 
 
@@ -73,6 +88,9 @@ public class ZoneDeJeu {
 	}
 
 	public boolean estDepotLimiteAutorise(Limite limite) {
+		if(estPrioritaire()) {
+			return false;
+		}
 	    if (limite instanceof DebutLimite) {
 	        return limitesVitesse.isEmpty() || (limitesVitesse.getLast() instanceof FinLimite);
 	    }
@@ -80,6 +98,9 @@ public class ZoneDeJeu {
 	}
 
 	public boolean estDepotBatailleAutorise(Bataille bataille) {
+		if(bottes.contains(new Botte(bataille.getType(), bataille.getType().getParade()))){
+			return false;
+		}
 	    if (bataille instanceof Attaque) {
 	        return peutAvancer();
 	    }
@@ -96,7 +117,13 @@ public class ZoneDeJeu {
 	    if (carte instanceof Limite) {
 	        return estDepotLimiteAutorise((Limite) carte);
 	    }
-	    return estDepotBatailleAutorise((Bataille) carte);
+	    return (carte instanceof Botte)||(estDepotBatailleAutorise((Bataille) carte)) ;
+	}
+	
+	public boolean estPrioritaire() {
+		Botte botte=new Botte(Type.FEU,"VéhiculePrioritaire");
+		Object[] liste=bottes.toArray();
+		return bottes.contains(botte);
 	}
 
 }
