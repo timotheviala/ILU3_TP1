@@ -58,13 +58,11 @@ public class ZoneDeJeu {
 			attaquesParades.add(bataille);
 		}else {
 			Botte botte=(Botte) c;
-			System.out.println(botte.getNom());
 			bottes.add(botte);
 		}
 	}
 	
 	public boolean peutAvancer() {
-		System.out.println("Cond 1 "+estPrioritaire());
 	    return (attaquesParades.isEmpty() && estPrioritaire())
 	    		|| (!attaquesParades.isEmpty() && attaquesParades.getLast() instanceof Parade && estPrioritaire() ) 
 	    		 || (!attaquesParades.isEmpty() && attaquesParades.getLast().getType() == Type.FEU && "FeuVert".equals(attaquesParades.getLast().getType().getParade()))
@@ -121,9 +119,7 @@ public class ZoneDeJeu {
 	}
 	
 	public boolean estPrioritaire() {
-		Botte botte=new Botte(Type.FEU,"VéhiculePrioritaire");
-		Object[] liste=bottes.toArray();
-		return bottes.contains(botte);
+		return bottes.contains(Cartes.PRIORITAIRE);
 	}
 
 }
