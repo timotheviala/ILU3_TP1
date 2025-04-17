@@ -56,18 +56,36 @@ public class ZoneDeJeu {
 				bataille=(Parade) c;
 			}
 			attaquesParades.add(bataille);
+			System.out.println(bataille.getType().getBotte());
 		}else {
 			Botte botte=(Botte) c;
+			if(c.getNom()=="AsDuVolant") {
+				System.out.println("Type: "+botte.getType()+" Nom: "+botte.getNom());
+			}
 			bottes.add(botte);
+			Botte newelle=new Botte(botte.getType(),botte.getNom());
+			System.out.println(bottes.contains(newelle));
+			System.out.println("---egalite: "+botte.equals(new Botte(Type.ACCIDENT,"AsDuVolant"))+"------Apres ajout:"+bottes.contains(new Botte(Type.ACCIDENT,"AsDuVolant")));
 		}
+	}
+	
+	private boolean lastCond() {
+		if(!attaquesParades.isEmpty()) {
+		System.out.println("Bottes:"+bottes+" Derniere attaque:"+attaquesParades.getLast().getType().toString());}
+		System.out.println(bottes.contains(new Botte(Type.FEU,"AsDuVolant")));
+		System.out.println("Contient une carte AsDuVolant de type accident:"+bottes.contains(new Botte(Type.ACCIDENT,"AsDuVolant")));
+		System.out.println(!attaquesParades.isEmpty() && (attaquesParades.getLast() instanceof Attaque) && !(bottes.isEmpty()) && estPrioritaire()
+				&& bottes.contains(new Botte(attaquesParades.getLast().getType(),attaquesParades.getLast().getType().getBotte())));
+		return (!attaquesParades.isEmpty() && (attaquesParades.getLast() instanceof Attaque) && !(bottes.isEmpty()) && estPrioritaire()
+				&& bottes.contains(new Botte(attaquesParades.getLast().getType(),attaquesParades.getLast().getType().getBotte())));
 	}
 	
 	public boolean peutAvancer() {
 	    return (attaquesParades.isEmpty() && estPrioritaire())
-	    		|| (!attaquesParades.isEmpty() && attaquesParades.getLast() instanceof Parade && estPrioritaire() ) 
-	    		 || (!attaquesParades.isEmpty() && attaquesParades.getLast().getType() == Type.FEU && "FeuVert".equals(attaquesParades.getLast().getType().getParade()))
-	    		 || (!attaquesParades.isEmpty() && attaquesParades.getLast() instanceof Attaque && attaquesParades.getLast().getType() == Type.FEU && estPrioritaire())
-	    		 || (!attaquesParades.isEmpty() && attaquesParades.getLast() instanceof Attaque && !(bottes.isEmpty()) && estPrioritaire());
+	    		|| (!attaquesParades.isEmpty() && (attaquesParades.getLast() instanceof Parade) && estPrioritaire() ) 
+	    		 || (!attaquesParades.isEmpty() && attaquesParades.getLast().getType() == Type.FEU && "FeuVert".equals(attaquesParades.getLast().getNom()))
+	    		 || (!attaquesParades.isEmpty() && (attaquesParades.getLast() instanceof Attaque) && attaquesParades.getLast().getType() == Type.FEU && estPrioritaire())
+	    		 || lastCond();
 	}
 
 	public boolean estDepotFeuVertAutorise() {
